@@ -11,8 +11,29 @@ class Viewer(models.Model):
             ("Other", "Other")
         ]
     )
-    country = models.CharField(max_length = 100)
-    primary_device = models.CharField(max_length = 100)
+    country = models.CharField(
+        max_length = 100,
+        choices=[
+            ("India", "India"),
+            ("USA", "USA"),
+            ("Canada", "Canada"),
+            ("Brazil", "Brazil"),
+            ("France", "France"),
+            ("Australia", "Australia"),
+            ("UK", "UK"),
+            ("Japan", "Japan"),
+            ("Germany", "Germany"),
+        ]
+    )
+    primary_device = models.CharField(
+        max_length = 100,
+        choices=[
+            ("Mobile","Mobile"),
+            ("Tablet","Tablet"),
+            ("Laptop","Laptop"),
+            ("Smart TV","Smart TV")
+        ]
+    )
     devices_used = models.IntegerField()
 
 class Account(models.Model):
@@ -26,12 +47,38 @@ class Account(models.Model):
             ("Premium", "Premium")
         ]
     )
-    monthly_fee = models.FloatField()
-    payment_method = models.CharField(max_length = 100)
+    monthly_fee = models.FloatField(
+        choices=[
+            (7.99, 7.99),
+            (12.99, 12.99),
+            (15.99, 15.99)
+        ]
+    )
+    payment_method = models.CharField(
+        max_length = 100,
+        choices=[
+            ("Paypal","Paypal"),
+            ("UPI", "UPI"),
+            ("Credit Card","Credit Card"),
+            ("Debit Card", "Debit Card")
+        ]
+    )
 
 class Behavior(models.Model):
     viewer = models.ForeignKey(Viewer, on_delete=models.CASCADE)
-    favorite_genre = models.CharField(max_length =100)
+    favorite_genre = models.CharField(
+        max_length =100,
+        choices = [
+            ("Action", "Action"),
+            ("Comedy", "Comedy"),
+            ("Drama", "Drama"),
+            ("Horror", "Horror"),
+            ("Romance", "Romance"),
+            ("Documentary", "Documentary"),
+            ("Sci-Fi", "Sci-Fi"),
+            ("Thriller","Thriller"),
+        ]
+    )
     avg_watch_time_mins = models.IntegerField()
     watch_sessions_per_week = models.IntegerField()
     binge_watch_sessions = models.IntegerField()

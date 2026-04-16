@@ -12,11 +12,13 @@ class ViewerAdmin(admin.ModelAdmin):
     )
     search_fields = (
         "country", 
-        "gender"
+        "gender",
+        "primary_device"
     )
     list_filter = (
         "gender", 
-        "country"
+        "country",
+        "primary_device"
     )
 
 admin.site.register(Viewer, ViewerAdmin)
@@ -54,11 +56,11 @@ class BehaviorAdmin(admin.ModelAdmin):
 
     search_fields = (
         "favorite_genre",
-        "viewer__country",
     )
 
     list_filter = (
         "favorite_genre",
         "churned",
-        "watch_sessions_per_week",
     )
+
+admin.site.register(Behavior, BehaviorAdmin)
