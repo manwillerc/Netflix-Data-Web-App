@@ -11,7 +11,7 @@ Account List
     {%for account in accounts %}
         <li>
             <a href="{% url 'account_details' account.pk %}">
-                Account {{ account.pk }}
+                Account {{ forloop.counter }}
             </a>
         </li>
     {% empty %}

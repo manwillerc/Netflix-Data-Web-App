@@ -11,7 +11,7 @@ Viewer List
     {%for viewer in viewers %}
         <li>
             <a href="{% url 'viewer_details' viewer.pk %}">
-                Viewer {{ viewer.pk }}
+                Viewer {{ forloop.counter }}
             </a>
         </li>
     {% empty %}

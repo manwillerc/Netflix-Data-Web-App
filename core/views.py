@@ -68,6 +68,12 @@ class ViewerAccountDetailView(DetailView):
     template_name = 'core/viewer_account_details.html'
     context_object_name = "account"
 
+    def get_object(self):
+        return Account.objects.get(
+            pk=self.kwargs["account_id"],
+            viewer_id=self.kwargs["viewer_id"]
+        )
+
 class BehaviorDetailView(DetailView):
     model = Behavior
     template_name = 'core/behavior_details.html'
