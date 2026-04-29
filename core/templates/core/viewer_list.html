@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Viewer List
+{% endblock %}
+
+{%block content%}
+
+<h1>Viewers</h1>
+<ul>
+    {%for viewer in viewers %}
+        <li>
+            <a href="{% url 'viewer_details' viewer.pk %}">
+                Viewer {{ viewer.pk }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No viewers found</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

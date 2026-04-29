@@ -45,8 +45,7 @@ admin.site.register(Account, AccountAdmin)
 
 class BehaviorAdmin(admin.ModelAdmin):
     list_display = (
-        "id",
-        "viewer",
+        "account",
         "favorite_genre",
         "avg_watch_time_mins",
         "watch_sessions_per_week",

@@ -1,8 +1,108 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from .models import Viewer, Account, Behavior
+from django.views.generic import ListView, DetailView
+from .forms import AccountForm, ViewerForm, BehaviorForm
+from .models import Viewer, Account, Behavior
+import pandas as pd
 
 # Create your views here.
 def home(request):
-    return render(request, 'core/home.html')
+    total_viewers = Viewer.objects.count()
+    total_accounts = Account.objects.count()
+
+    objects = {
+        "total_viewers":total_viewers,
+        "total_accounts":total_accounts
+    }
+
+    return render(request, 'core/home.html', objects)
 
 def about(request):
     return render(request, 'core/about.html')
+
+def user_list(request):
+    viewers = Viewer.objects.all()
+    df = pd.DataFrame(list(viewers.values()))
+    return render(request, "core/user_list.html", {"table_html":df.to_html(classes="table table-striped", index=False)})
+
+def account_list(request):
+    accounts = Account.objects.all()
+    df = pd.DataFrame(list(accounts.values()))
+    df_no_id = df.drop(columns='id')
+    return render(request, "core/account_list.html", {"table_html":df_no_id.to_html(classes="table table-striped", index=False)})
+
+def behavior_list(request):
+    behaviors = Behavior.objects.all()
+    df = pd.DataFrame(list(behaviors.values()))
+    return render(request, "core/behavior_list.html", {"table_html":df.to_html(classes="table table-striped", index=False)})
+
+class ViewerListView(ListView):
+    model = Viewer
+    template_name = 'core/viewer_list.html'
+    context_object_name = "viewers"
+
+class ViewerDetailView(DetailView):
+    model = Viewer
+    template_name = 'core/viewer_details.html'
+    context_object_name = "viewer"
+
+class AccountListView(ListView):
+    model = Account
+    template_name = 'core/account_list.html'
+    context_object_name = "accounts"
+
+class AccountDetailView(DetailView):
+    model = Account
+    template_name = 'core/account_details.html'
+    context_object_name = "account"
+
+class BehaviorDetailView(DetailView):
+    model = Behavior
+    template_name = 'core/behavior_details.html'
+    context_object_name = "behavior"
+
+def create_account(request):
+    if request.method == "POST":
+        account_form = AccountForm(request.POST)
+        behavior_form = BehaviorForm(request.POST)
+        if account_form.is_valid() and behavior_form.is_valid():
+            account = account_form.save()
+            behavior = behavior_form.save(commit=False)  # ← change this
+            behavior.account = account  
+            behavior.save()
+            messages.success(request, "Account creates successfully")
+            return redirect("account_details", pk=account.pk)
+    else:
+        account_form = AccountForm()
+        behavior_form = BehaviorForm()
+
+    return render(request, "core/account_form.html", {"account_form":account_form,"behavior_form":behavior_form, "account":None, "behavior":None})
+
+def edit_account(request, pk):
+    account = get_object_or_404(Account, pk=pk)
+    behavior = get_object_or_404(Behavior, pk=pk)
+
+    if request.method == "POST":
+        account_form = AccountForm(request.POST, instance=account)
+        behavior_form = BehaviorForm(request.POST, instance=behavior)
+
+        if account_form.is_valid() and behavior_form.is_valid():
+            account_form.save()
+            behavior_form.save()
+            return redirect("account_details", pk=account.pk)
+    
+    else:
+        account_form = AccountForm(instance=account)
+        behavior_form = BehaviorForm(instance=behavior)
+
+    return render(request, "core/account_form.html", {"account_form":account_form,"behavior_form":behavior_form, "account":account, "behavior":behavior})
+
+def delete_account(request, pk):
+    account = get_object_or_404(Account, pk=pk)
+
+    if request.method == "POST":
+        account.delete()
+        return redirect("account_list")
+    
+    return render(request, "core/account_confirm_delete.html", {"account":account})

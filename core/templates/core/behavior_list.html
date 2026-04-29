@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Account Detail
+{% endblock %}
+
+{% block content %}
+
+<h1>Account Details</h1>
+
+<div>
+    
+    <li>Subscription Type: {{ account.subscription_type }}</li>
+    <li>Monthly Fee: {{ account.monthly_fee }}</li>
+    <li>Payment Method: {{ account.payment_method }}</li>
+    <li>Account Age (months): {{ account.account_age_months }}</li>
+</div>
+<p>
+    <a href="{% url 'viewer_details' account.viewer.pk %}">Owner info</a>
+</p>
+<br>
+<a href="{% url 'account_list' %}">← Back to list</a>
+
+{% endblock %}

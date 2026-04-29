@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Behavior Detail
+{% endblock %}
+
+{% block content %}
+
+<h1>Account Behavior</h1>
+
+<div>
+    <p>Account ID: {{ behavior.account.pk }}</p>
+
+    <p>Favorite Genre: {{ behavior.favorite_genre }}</p>
+    <p>Avg Watch Time (mins): {{ behavior.avg_watch_time_mins }}</p>
+    <p>Sessions per Week: {{ behavior.watch_sessions_per_week }}</p>
+    <p>Binge Watch Sessions: {{ behavior.binge_watch_sessions }}</p>
+    <p>Completion Rate: {{ behavior.completion_rate }}%</p>
+    <p>Rating Given: {{ behavior.rating_given }}/10</p>
+    <p>Content Interactions: {{ behavior.content_interactions }}</p>
+    <p>Recommendation Click Rate: {{ behavior.recommendation_click_rate }}%</p>
+    <p>Days Since Last Login: {{ behavior.days_since_last_login }}</p>
+    <p>Churned: {{ behavior.churned }}</p>
+</div>
+<p>
+    <a href="{% url 'account_details' behavior.account.pk %}">Back to account info</a>
+</p>
+<br>
+
+{% endblock %}

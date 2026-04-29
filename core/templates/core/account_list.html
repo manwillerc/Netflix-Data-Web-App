@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Account List
+{% endblock %}
+
+{%block content%}
+
+<h1>Accounts</h1>
+<ul>
+    {%for account in accounts %}
+        <li>
+            <a href="{% url 'account_details' account.pk %}">
+                Account {{ account.pk }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No accounts found</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class Viewer(models.Model):
@@ -36,8 +37,10 @@ class Viewer(models.Model):
     )
     devices_used = models.IntegerField()
 
+    
+
 class Account(models.Model):
-    viewer = models.OneToOneField(Viewer, on_delete=models.CASCADE)
+    viewer = models.ForeignKey(Viewer, on_delete=models.CASCADE)
     account_age_months = models.IntegerField()
     subscription_type = models.CharField(
         max_length = 100,
@@ -65,14 +68,14 @@ class Account(models.Model):
     )
 
 class Behavior(models.Model):
-    viewer = models.ForeignKey(Viewer, on_delete=models.CASCADE)
+    account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
     favorite_genre = models.CharField(
         max_length =100,
         choices = [
             ("Action", "Action"),
             ("Comedy", "Comedy"),
             ("Drama", "Drama"),
-            ("Horror", "Horror"),
+            ("Horror", "Horror"), 
             ("Romance", "Romance"),
             ("Documentary", "Documentary"),
             ("Sci-Fi", "Sci-Fi"),
@@ -82,10 +85,25 @@ class Behavior(models.Model):
     avg_watch_time_mins = models.IntegerField()
     watch_sessions_per_week = models.IntegerField()
     binge_watch_sessions = models.IntegerField()
-    completion_rate = models.IntegerField()
-    rating_given = models.FloatField()
+    completion_rate = models.IntegerField(
+        validators= [
+            MinValueValidator(0),
+            MaxValueValidator(100)
+        ]
+    )
+    rating_given = models.FloatField(
+        validators = [
+            MinValueValidator(0),
+            MaxValueValidator(10)
+        ]
+    )
     content_interactions = models.IntegerField()
-    recommendation_click_rate = models.IntegerField()
+    recommendation_click_rate = models.IntegerField(
+        validators= [
+            MinValueValidator(0),
+            MaxValueValidator(100)
+        ]
+    )
     days_since_last_login = models.IntegerField()
-    churned = models.BooleanField(default=False)
+    churned = models.BooleanField()
 

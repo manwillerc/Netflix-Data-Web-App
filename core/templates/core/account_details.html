@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Account Detail
+{% endblock %}
+
+{% block content %}
+
+<h1>Account Details</h1>
+
+<div>
+    
+    <p>Subscription Type: {{ account.subscription_type }}</p>
+    <p>Monthly Fee: {{ account.monthly_fee }}</p>
+    <p>Payment Method: {{ account.payment_method }}</p>
+    <p>Account Age (months): {{ account.account_age_months }}</p>
+</div>
+<p>
+    <li>
+        <a href="{% url 'viewer_details' account.viewer.pk %}">Owner info</a>
+    </li>
+    <li>
+        <a href="{% url 'behavior_details' account.pk %}">Behavior info</a>
+    </li>
+</p>
+<p> <a href="{% url 'edit_account' account.pk%}">Edit</a></p>
+<p> <a href="{% url 'confirm_delete' account.pk%}">Delete </a> </p>
+<br>
+<a href="{% url 'account_list' %}">← Back to account list</a>
+
+{% endblock %}

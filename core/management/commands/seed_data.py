@@ -14,7 +14,9 @@ class Command(BaseCommand):
         with open(file_path, newline="") as file:
             reader = csv.DictReader(file)
 
+
             for row in reader:
+                
                 viewer = Viewer.objects.create(
                     age=row["age"],
                     gender=row["gender"],
@@ -22,15 +24,16 @@ class Command(BaseCommand):
                     primary_device=row["primary_device"],
                     devices_used=row["devices_used"],
                 )
-                Account.objects.create(
+                account = Account.objects.create(
                     viewer=viewer,
                     account_age_months=row["account_age_months"],
                     subscription_type=row["subscription_type"],
                     monthly_fee=row["monthly_fee"],
                     payment_method=row["payment_method"],
                 )
+                
                 Behavior.objects.create(
-                    viewer=viewer,
+                    account=account,
                     favorite_genre=row["favorite_genre"],
                     avg_watch_time_mins=row["avg_watch_time_minutes"],
                     watch_sessions_per_week=row["watch_sessions_per_week"],
@@ -40,7 +43,9 @@ class Command(BaseCommand):
                     content_interactions=row["content_interactions"],
                     recommendation_click_rate=row["recommendation_click_rate"],
                     days_since_last_login=row["days_since_last_login"],
-                    churned=row["churned"].lower() == "true",
+                    churned = row['churned'].strip().lower() == 'yes'
                 )
+                
+                
 
         self.stdout.write(self.style.SUCCESS("Data imported successfully"))

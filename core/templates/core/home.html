@@ -4,5 +4,20 @@
 
 {%block content%}
 <h1> Home page nigga!</h1>
-<p> This page uses the base layout</p>
+<div>
+    <h2>Total Viewers: {{total_viewers}}</h2>
+    <h2>Total Accounts: {{total_accounts}}</h2>
+</div>
+
+<div>
+    <li>
+        <a href="{% url 'viewer_list' %}" style="font-size: 20px">Viewers List</a>
+    </li> 
+    <li>
+        <a href="{% url 'account_list' %}" style="font-size: 20px">Account List</a> 
+    </li>
+    <li>
+        <a href="{% url 'add_account' %}" style="font-size: 20px">Add account</a> 
+    </li>
+</div>
 {%endblock%}
