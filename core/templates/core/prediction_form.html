@@ -1,0 +1,20 @@
+{% extends "core/base.html"%}
+
+{%block content %}
+<h1>
+    Churn Prediction Tool
+</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ prediction_form.as_p }}
+
+    <button type = "submit"> Predict Churn </button>
+</form>
+
+{% if churn_pred is not None %}
+    <hr>
+    <h2>Result:</h2>
+    <p><strong>Churn Prediction:</strong> {{ churn_pred }}</p>
+{% endif %}
+
+{%endblock%}

@@ -1,0 +1,12 @@
+{% extends "core/base.html"%}
+
+{%block content %}
+<h1>
+    {%if viewer %} Edit {% else %} Add Viewer {% endif %}
+</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ viewer_form.as_p }}
+    <button type = "submit">Save    </button>
+</form>
+{%endblock%}

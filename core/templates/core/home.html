@@ -3,7 +3,7 @@
 {% block title%} Home {%endblock%}
 
 {%block content%}
-<h1> Home page nigga!</h1>
+<h1> Home page</h1>
 <div>
     <h2>Total Viewers: {{total_viewers}}</h2>
     <h2>Total Accounts: {{total_accounts}}</h2>
@@ -17,7 +17,11 @@
         <a href="{% url 'account_list' %}" style="font-size: 20px">Account List</a> 
     </li>
     <li>
+        <a href="{% url 'add_viewer' %}" style="font-size: 20px">Add Viewer</a> 
+    </li>
+    <li>
         <a href="{% url 'add_account' %}" style="font-size: 20px">Add account</a> 
     </li>
+
 </div>
 {%endblock%}

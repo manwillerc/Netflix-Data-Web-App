@@ -38,3 +38,58 @@ class BehaviorForm(forms.ModelForm):
             "days_since_last_login",
             "churned",
         ]
+
+class PredictionForm(forms.Form):
+    age = forms.IntegerField()
+    gender = forms.ChoiceField(
+        choices = [
+            ("Male", "Male"),
+            ("Female", "Female"),
+            ("Other", "Other")
+        ]
+    )
+    country = forms.ChoiceField(
+        choices=[
+            ("India", "India"),
+            ("USA", "USA"),
+            ("Canada", "Canada"),
+            ("Brazil", "Brazil"),
+            ("France", "France"),
+            ("Australia", "Australia"),
+            ("UK", "UK"),
+            ("Japan", "Japan"),
+            ("Germany", "Germany"),
+        ]
+    )
+    primary_device = forms.ChoiceField(
+        choices=[
+            ("Mobile","Mobile"),
+            ("Tablet","Tablet"),
+            ("Laptop","Laptop"),
+            ("Smart TV","Smart TV")
+        ]
+    )
+    devices_used = forms.IntegerField()
+    account_age_months = forms.IntegerField()
+    subscription_type = forms.ChoiceField(
+        choices=[
+            ("Standard", "Standard"),
+            ("Basic", "Basic"),
+            ("Premium", "Premium")
+        ]
+    )
+    monthly_fee = forms.ChoiceField(
+        choices=[
+            (7.99, 7.99),
+            (12.99, 12.99),
+            (15.99, 15.99)
+        ]
+    )
+    payment_method = forms.ChoiceField(
+        choices=[
+            ("Paypal","Paypal"),
+            ("UPI", "UPI"),
+            ("Credit Card","Credit Card"),
+            ("Debit Card", "Debit Card")
+        ]
+    )
