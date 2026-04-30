@@ -9,7 +9,7 @@ Account Detail
 <h1>Account Details</h1>
 
 <div>
-    
+    <p>ID: {{ account.id }}</p>
     <p>Subscription Type: {{ account.subscription_type }}</p>
     <p>Monthly Fee: {{ account.monthly_fee }}</p>
     <p>Payment Method: {{ account.payment_method }}</p>
@@ -17,7 +17,7 @@ Account Detail
 </div>
 <p>
     <li>
-        <a href="{% url 'viewer_details' account.viewer.pk %}">Owner info</a>
+        <a href="{% url 'viewer_details' account.viewer.pk %}">Viewer info</a>
     </li>
     <li>
         <a href="{% url 'behavior_details' account.pk %}">Behavior info</a>

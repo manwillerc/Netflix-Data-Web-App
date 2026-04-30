@@ -1,5 +1,7 @@
 from django import forms
+from django_select2.forms import ModelSelect2Widget
 from .models import Viewer, Behavior, Account
+
 
 class ViewerForm(forms.ModelForm):
     class Meta:
@@ -13,15 +15,35 @@ class ViewerForm(forms.ModelForm):
         ]
 
 class AccountForm(forms.ModelForm):
+    viewer_id = forms.IntegerField()
+
     class Meta:
         model = Account
         fields = [
-            "viewer",
+            "viewer_id",
             "account_age_months", 
             "subscription_type",
             "monthly_fee",
             "payment_method"
         ]
+    
+    def clean_viewer_id(self):
+        vid = self.cleaned_data["viewer_id"]
+
+        if Viewer.objects.filter(id=vid).exists() == False:
+            raise forms.ValidationError("Viewer does not exist")
+
+        return vid
+    
+    def save(self, commit=True):
+        account = super().save(commit=False)
+
+        account.viewer_id = self.cleaned_data["viewer_id"]
+
+        if commit:
+            account.save()
+
+        return account
 
 class BehaviorForm(forms.ModelForm):
     class Meta:

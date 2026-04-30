@@ -6,7 +6,7 @@ Viewer Detail
 
 {% block content %}
 
-<h1>Viewer Detail</h1>
+<h1>Viewer Information</h1>
 
 <div>
     <p>Age: {{ viewer.age }}</p>
@@ -15,7 +15,7 @@ Viewer Detail
     <p>Primary Device: {{ viewer.primary_device }}</p>
     <p>Devices Used: {{ viewer.devices_used }}</p>
     {% for account in viewer.account_set.all %}
-        <a href="{% url 'viewer_account_details' viewer.pk account.pk %}">Account {{forloop.counter}}</a>
+        <a href="{% url 'account_details' account.pk %}">Account {{forloop.counter}}</a>
     {% empty %}
         <p>Could not find any accounts belonging to user</p>
     {% endfor %}
