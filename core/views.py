@@ -4,10 +4,12 @@ from .models import Viewer, Account, Behavior
 from django.views.generic import ListView, DetailView
 from .forms import AccountForm, ViewerForm, BehaviorForm, PredictionForm
 from .models import Viewer, Account, Behavior
+from django.db import connection
 import pandas as pd
 import sklearn
 import xgboost
 import joblib
+import json
 
 # Create your views here.
 def home(request):
@@ -190,3 +192,53 @@ def predict_churn(request):
         prediction_form = PredictionForm()
 
     return render(request, "core/prediction_form.html", {"prediction_form":prediction_form, "churn_pred":churn_pred})
+
+def dashboard(request):
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT a.subscription_type, COUNT(*)
+            FROM core_account a
+            JOIN core_behavior b
+            ON a.id = b.account_id
+            WHERE b.churned = TRUE
+            GROUP BY a.subscription_type;
+        """)
+        rows = cursor.fetchall()
+
+    
+        label = [row[0] for row in rows]
+        values = [row[1] for row in rows]
+
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT a.age, AVG(c.watch_sessions_per_week)
+            FROM core_viewer a
+            JOIN core_account b
+            ON a.id = b.viewer_id
+            JOIN core_behavior c
+            ON b.id = c.account_id
+            GROUP BY a.age;
+        """)
+        rows = cursor.fetchall()
+
+    
+        age = [row[0] for row in rows]
+        avg_watch_session = [row[1] for row in rows]
+
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT a.country, 
+                    SUM(b.monthly_fee * b.account_age_months) AS total_profit
+            FROM core_viewer a
+            JOIN core_account b
+            ON a.id = b.viewer_id
+            GROUP BY a.country
+            ORDER BY total_profit DESC;
+        """)
+        rows = cursor.fetchall()
+
+    
+        country = [row[0] for row in rows]
+        total_revenue = [row[1] for row in rows]
+
+    return render(request, "core/dashboard.html", {"label":label, "values":values, "age":age,"avg_watch_session":avg_watch_session, "country":country, "total_revenue":total_revenue})

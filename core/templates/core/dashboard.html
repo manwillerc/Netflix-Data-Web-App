@@ -1,0 +1,97 @@
+{% extends "core/base.html" %}
+
+{%block title%} Analytics {%endblock%}
+
+{%block content%}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<container>
+    <h1>Analytics Dashboard</h1>
+</container>
+
+<div class="chart-grid">
+    <container>
+    <h3>Churned Users by Subscription</h3>
+    <div class="chart-box">
+        
+        <canvas id="chart1"></canvas>
+    </div>
+    </container>
+    <container>
+    <h3>Average Watch Sessions Per Week by Age</h3>
+    <div class="chart-box">
+        
+        <canvas id="chart2"></canvas>
+    </div>
+    </container>
+    <container>
+    <h3>Total Revenue by Country</h3>
+    <div class="chart-box">
+        
+        <canvas id="chart3"></canvas>
+    </div>
+    </container>
+</div>
+<script>
+    const labels = {{ label|safe }};
+    const data = {{ values|safe }};
+
+    new Chart(document.getElementById('chart1'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Churned Users by Subscription',
+                data: data
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+</script>
+<script>
+    const chart_2_labels = {{ age|safe }};
+    const chart_2_data = {{ avg_watch_session|safe }};
+
+    new Chart(document.getElementById('chart2'), {
+        type: 'line',
+        data: {
+            labels: chart_2_labels,
+            datasets: [{
+                label: 'Average Watch Sessions Per Week by Age',
+                data: chart_2_data,
+                borderColor: "#B20710",
+                backgroundColor:"#212121",
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+</script>
+<script>
+    const chart_3_labels = {{ country|safe }};
+    const chart_3_data = {{ total_revenue|safe }};
+
+    new Chart(document.getElementById('chart3'), {
+        type: 'bar',
+        data: {
+            labels: chart_3_labels,
+            datasets: [{                        
+                label: 'Total Revenue by Country',
+                data: chart_3_data,
+                backgroundColor: "#B20710"
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            responsive: true,
+        }
+    });
+</script>
+{% endblock %}

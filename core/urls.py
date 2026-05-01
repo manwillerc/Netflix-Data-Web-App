@@ -20,8 +20,8 @@ urlpatterns = [
     path('add_viewer/', views.create_viewer, name='add_viewer'),
     path('viewer/<int:pk>/edit/', views.edit_viewer, name="edit_viewer"),
     path('viewer/<int:pk>/confirm_delete', views.delete_viewer, name="confirm_delete_viewer"),
-    path('prediction_tool/', views.predict_churn, name="prediction_form"),
-    path('viewer/<int:viewer_id>/account/<int:account_id>/', ViewerAccountDetailView.as_view(), name="viewer_account_details"),
-    path('account/<int:account_id>/viewer/<int:viewer_id>/', AccountViewerDetailView.as_view(), name="account_viewer_details")
+    path('prediction_tool/', views.predict_churn, name="prediction_tool"),
+    path('dashboard', views.dashboard, name="dashboard")
+
     
 ]
