@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+
+{%block title%} Top Charts {%endblock%}
+
+{%block content%}
+
+<h1 style="text-align: center;">Top Charts</h1>
+
+
+
+<MovieChart>
+    {% for movie in top_movies %}
+    <container>
+        <h1 style="margin:0px; font-size: 60px;">{{forloop.counter}}</h1>
+        <h2 style="margin:10px">"{{movie.title}}"</h2>
+        <img src="https://image.tmdb.org/t/p/w200{{ movie.image }}">
+        <p style="font-size:18px">{{movie.overview}}</p>
+    </container>
+    {% endfor %}
+</MovieChart>
+
+
+
+{%endblock%}

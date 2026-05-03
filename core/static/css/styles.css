@@ -1,17 +1,44 @@
-body {
-    background-color: #212121;
-    color: green;
-    font-family: 'DM Sans', sans-serif
+
+:root {
+    --theme_black: #212121;
+    --theme_red: #B20710;
 }
 
+html,body {
+    background-color: var(--theme_black);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    overscroll-behavior: none;
+    margin:0;
+    font-weight: 100;
+}
+
+body * {
+    font-weight: inherit;
+}
+
+
+
+
+
+
+
 a {
-   color: blue;
+   color: green;
    font-size: 10px; 
 }
 
 a:hover {
-    color:lightblue
+    background-color: rgb(218, 118, 135);
 }
+
+
+
+
+
+
+
 
 nav {
     display: flex;
@@ -19,6 +46,12 @@ nav {
     padding: 15px 20px;
     background: #B20710;
     align-items: center;
+    position: sticky;   /* or sticky if you want it to scroll then stick */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+
 }
 
 nav a {
@@ -38,11 +71,13 @@ nav a.active {
     color: black;
 }
 
-container {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center;
-}
+
+
+
+
+
+
+
 
 .chart-grid {
     display: grid;
@@ -61,6 +96,7 @@ container {
     height: 400px;
     display: flex;
     flex-direction: column;
+    flex:1
 }
 
 
@@ -70,10 +106,119 @@ container {
     height: 100% !important;
 }
 
+
+
+
+
+
+
 .form-box {
     background: #212121;
     border-radius: 12px;
     padding: 15px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 
+}
+
+
+
+
+
+
+
+
+
+.chart-label-text {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 100;
+}
+
+.stat-label {
+    margin:10px;
+    font-size:30px;
+}
+
+.stat-text {
+    margin:10px;
+    font-size:80px;
+}
+
+
+
+
+
+
+
+
+
+
+container {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+    padding:5px;
+    border-radius: 12px;
+    box-shadow: 0 2px 20px rgb(25, 24, 24);
+}
+
+.stat-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+    box-shadow: none;
+}
+
+.stat-box {
+    padding-left:30px;
+    padding-right:30px;
+    text-align: center;
+}
+
+
+
+.btn {
+    display: inline-flex;
+    background: #B20710;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+
+    border-top: 3px solid #d61a24;
+    border-left: 3px solid #d61a24;
+    border-right: 3px solid #7a040a;
+    border-bottom: 3px solid #7a040a;
+    border-width: 5px;
+
+    text-decoration: none;
+    font-size: 30px;
+
+    transform: translateY(0);
+    transition: 0.1s ease;
+    justify-content: center;
+
+    padding-top: 30px; 
+    padding-bottom: 30px;
+}
+
+
+.button-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding-top: 50px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+
+MovieChart {
+    display:flex;
+    flex-direction: column;
+    gap:30px;
+    padding-left: 40px;
+    padding-right: 40px;
 }

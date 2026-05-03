@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Viewer, Account, Behavior
+from .models import Viewer, Account, Behavior, Movie
 from django.views.generic import ListView, DetailView
 from .forms import AccountForm, ViewerForm, BehaviorForm, PredictionForm
 from .models import Viewer, Account, Behavior
@@ -175,7 +175,7 @@ def delete_viewer(request, pk):
 
 
 def predict_churn(request):
-    MODEL_PATH = "/Users/cadenmanwiller/Desktop/CIS4930/NetflixWebApp/core/models/churn_model.pkl"
+    MODEL_PATH = "/Users/cadenmanwiller/Desktop/CIS4930/NetflixWebApp/core/ml_models/churn_model.pkl"
     model = joblib.load(MODEL_PATH)
 
     churn_pred = None
@@ -242,3 +242,9 @@ def dashboard(request):
         total_revenue = [row[1] for row in rows]
 
     return render(request, "core/dashboard.html", {"label":label, "values":values, "age":age,"avg_watch_session":avg_watch_session, "country":country, "total_revenue":total_revenue})
+
+def top_charts(request):
+
+    top_movies = Movie.objects.all().order_by("popularity")
+
+    return render(request, "core/top_charts.html", {"top_movies":top_movies})

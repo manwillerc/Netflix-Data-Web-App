@@ -2,7 +2,7 @@ import csv
 from django.core.management.base import BaseCommand
 from core.models import Viewer, Account, Behavior
 
-class Command(BaseCommand):
+class CSVCommand(BaseCommand):
     help = "Load CSV data into database"
 
     def add_arguments(self, parser):

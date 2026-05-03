@@ -16,6 +16,7 @@
             <a href="{%url 'about'%}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}"> About </a>
             <a href="{%url 'dashboard'%}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"> Analytics </a>
             <a href="{%url 'prediction_tool'%}" class="{% if request.resolver_match.url_name == 'prediction_tool' %}active{% endif %}"> Prediction Tool </a>
+            <a href="{%url 'top_charts'%}" class="{% if request.resolver_match.url_name == 'top_charts' %}active{% endif %}"> Top Charts </a>
         </nav>
 
         {%block content%}

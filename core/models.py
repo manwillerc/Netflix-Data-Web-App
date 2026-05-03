@@ -107,3 +107,8 @@ class Behavior(models.Model):
     days_since_last_login = models.IntegerField()
     churned = models.BooleanField()
 
+class Movie(models.Model):
+    title = models.CharField(max_length=100)
+    overview = models.TextField()
+    image = models.CharField(max_length=100, default=None)
+    popularity = models.FloatField()

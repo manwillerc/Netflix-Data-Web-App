@@ -3,25 +3,28 @@
 {% block title%} Home {%endblock%}
 
 {%block content%}
-<h1> Home page</h1>
-<div>
-    <h2>Total Viewers: {{total_viewers}}</h2>
-    <h2>Total Accounts: {{total_accounts}}</h2>
-</div>
+<h1 style="text-align: center;"> Dashboard</h1>
+<container class="stat-container">
+    <container class="stat-box">
+        <p class="stat-label">Total Viewers: </p>
+        <p class="stat-text">{{total_viewers}}</p>
+    </container>
+    <container class="stat-box">
+        <p class="stat-label">Total Accounts:</p>
+        <p class="stat-text">{{total_accounts}}</p>
+    </container>
+</container>
 
-<div>
-    <li>
-        <a href="{% url 'viewer_list' %}" style="font-size: 20px">Viewers List</a>
-    </li> 
-    <li>
-        <a href="{% url 'account_list' %}" style="font-size: 20px">Account List</a> 
-    </li>
-    <li>
-        <a href="{% url 'add_viewer' %}" style="font-size: 20px">Add Viewer</a> 
-    </li>
-    <li>
-        <a href="{% url 'add_account' %}" style="font-size: 20px">Add account</a> 
-    </li>
+<div class="button-grid" style="margin-top: 30px;">
+
+        <a href="{% url 'viewer_list' %}" class="btn">Viewers List</a>
+
+        <a href="{% url 'account_list' %}" class="btn">Account List</a> 
+
+        <a href="{% url 'add_viewer' %}" class="btn">Add Viewer</a> 
+
+        <a href="{% url 'add_account' %}" class="btn">Add account</a> 
+
 
 </div>
 {%endblock%}

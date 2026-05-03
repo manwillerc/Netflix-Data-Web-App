@@ -21,7 +21,8 @@ urlpatterns = [
     path('viewer/<int:pk>/edit/', views.edit_viewer, name="edit_viewer"),
     path('viewer/<int:pk>/confirm_delete', views.delete_viewer, name="confirm_delete_viewer"),
     path('prediction_tool/', views.predict_churn, name="prediction_tool"),
-    path('dashboard', views.dashboard, name="dashboard")
+    path('dashboard', views.dashboard, name="dashboard"),
+    path('top_charts/', views.top_charts, name="top_charts")
 
     
 ]
