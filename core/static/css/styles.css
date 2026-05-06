@@ -1,4 +1,6 @@
 
+
+
 :root {
     --theme_black: #212121;
     --theme_red: #B20710;
@@ -15,6 +17,11 @@ html,body {
     font-weight: 100;
 }
 
+.page-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
 body * {
     font-weight: inherit;
 }
@@ -26,12 +33,12 @@ body * {
 
 
 a {
-   color: green;
-   font-size: 10px; 
+   color: white;
+   font-size: 40px; 
 }
 
 a:hover {
-    background-color: var(--theme_red_hover);
+    color:rgb(239, 47, 79);
 }
 
 
@@ -177,6 +184,14 @@ container {
     padding-bottom: 20px;
 }
 
+.list {
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 30px;
+
+    padding-bottom: 20px;
+}
+
 .stat-container {
     display: flex;
     flex-direction: row;
@@ -190,6 +205,17 @@ container {
     padding-left:30px;
     padding-right:30px;
     text-align: center;
+}
+
+.link-box {
+    background:var(--theme_black); 
+    border-radius:12px; 
+    border: 3px solid; 
+    border-color: var(--theme_red); 
+    padding:20px; 
+    width:100%; 
+    text-align: center; 
+    gap:20px;
 }
 
 
@@ -271,4 +297,8 @@ input[type="number"] {
     border: 2px solid var(--theme_red);
     font-size: 16px;
     width:50px;
+}
+
+* {
+    box-sizing: border-box;
 }

@@ -6,17 +6,19 @@ Account List
 
 {%block content%}
 
-<h1>Accounts</h1>
-<ul>
+<h1 style="text-align: center; ">Accounts</h1>
+
+<div style="display:flex; flex-direction:column; gap:20px;">
     {%for account in accounts %}
-        <li>
-            <a href="{% url 'account_details' account.pk %}">
-                Account {{ forloop.counter }}
+        <div class="link-box">
+            <a href="{% url 'viewer_details' account.pk %}">
+                Account ID: {{ account.pk}}
             </a>
-        </li>
+        </div>
     {% empty %}
         <li>No accounts found</li>
     {% endfor %}
-</ul>
+</div>
+
 
 {% endblock %}

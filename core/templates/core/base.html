@@ -19,8 +19,11 @@
             <a href="{%url 'top_charts'%}" class="{% if request.resolver_match.url_name == 'top_charts' %}active{% endif %}"> Top Charts </a>
         </nav>
 
-        {%block content%}
-        {%endblock%}
+        
+    <div class="page-container">
+    {% block content %}
+    {% endblock %}
+    </div>
 
     </body>
 </html>

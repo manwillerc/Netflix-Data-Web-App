@@ -6,17 +6,19 @@ Viewer List
 
 {%block content%}
 
-<h1>Viewers</h1>
-<ul>
+<h1 style="text-align: center; ">Viewers</h1>
+
+<div style="display:flex; flex-direction:column; gap:20px;">
     {%for viewer in viewers %}
-        <li>
+        <div class="link-box">
             <a href="{% url 'viewer_details' viewer.pk %}">
-                Viewer {{ forloop.counter }}
+                Viewer ID: {{ viewer.pk}}
             </a>
-        </li>
+        </div>
     {% empty %}
         <li>No viewers found</li>
     {% endfor %}
-</ul>
+</div>
+
 
 {% endblock %}

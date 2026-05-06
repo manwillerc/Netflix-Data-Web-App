@@ -241,7 +241,24 @@ def dashboard(request):
         country = [row[0] for row in rows]
         total_revenue = [row[1] for row in rows]
 
-    return render(request, "core/dashboard.html", {"label":label, "values":values, "age":age,"avg_watch_session":avg_watch_session, "country":country, "total_revenue":total_revenue})
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT a.country, (SUM(c.churned)*100.0 / COUNT(*))
+            FROM core_viewer a JOIN core_account b
+            ON a.id = b.viewer_id
+            JOIN core_behavior c
+            ON b.id = c.account_id
+            GROUP BY a.country;
+        """)  
+        rows = cursor.fetchall()
+
+    
+        country2 = [row[0] for row in rows]
+        churn_rate = [row[1] for row in rows]
+
+        print(country2,churn_rate)
+
+    return render(request, "core/dashboard.html", {"label":label, "values":values, "age":age,"avg_watch_session":avg_watch_session, "country":country, "total_revenue":total_revenue, "country2":country2,"churn_rate":churn_rate })
 
 def top_charts(request):
 
