@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--(d=veyf-h@yrql((qo(2z^2i2&8$l4059^sc==rga&nvc9^0n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["streamingdataanalytics.onrender.com"]
 
