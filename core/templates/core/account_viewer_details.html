@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Account Detail
+{% endblock %}
+
+{% block content %}
+
+<h1>Viewer Details</h1>
+
+<div>
+    
+    <p>Subscription Type: {{ account.subscription_type }}</p>
+    <p>Monthly Fee: {{ account.monthly_fee }}</p>
+    <p>Payment Method: {{ account.payment_method }}</p>
+    <p>Account Age (months): {{ account.account_age_months }}</p>
+</div>
+<p>
+</p>
+<p> <a href="{% url 'edit_viewer' viewer.pk%}">Edit</a></p>
+<p> <a href="{% url 'confirm_delete_viewer' viewer.pk%}">Delete </a> </p>
+<br>
+<a href="{% url 'account_details' viewer.account.pk %}">Back to Account</a>
+
+{% endblock %}

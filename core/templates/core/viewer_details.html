@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Viewer Detail
+{% endblock %}
+
+{% block content %}
+
+<h1>Viewer Information</h1>
+
+<div>
+    <p>Age: {{ viewer.age }}</p>
+    <p>Gender: {{ viewer.gender }}</p>
+    <p>Country: {{ viewer.country }}</p>
+    <p>Primary Device: {{ viewer.primary_device }}</p>
+    <p>Devices Used: {{ viewer.devices_used }}</p>
+    {% for account in viewer.account_set.all %}
+        <a href="{% url 'account_details' account.pk %}">Account {{forloop.counter}}</a>
+    {% empty %}
+        <p>Could not find any accounts belonging to user</p>
+    {% endfor %}
+
+</div>
+<br>
+<p> <a href="{% url 'edit_viewer' viewer.pk%}">Edit</a></p>
+<p> <a href="{% url 'confirm_delete_viewer' viewer.pk%}">Delete </a> </p>
+
+<a href="{% url 'viewer_list' %}">Viewer List</a>
+
+{% endblock %}

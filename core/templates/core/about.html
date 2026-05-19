@@ -1,9 +1,79 @@
 {% extends "core/base.html" %}
+{% load static %}
 
-{%block title%} About {%endblock%}
+{% block title %}
+About
+{% endblock %}
 
-{%block content%}
+{% block content %}
+<container>
+<div style="max-width: 900px; margin: auto; display: flex; flex-direction: column; gap: 40px; padding: 20px;">
 
-<h1>This is the about page nigga</h1>
+    <!-- ABOUT THE SITE -->
+    <section>
+        <h1>About This Project</h1>
 
-{%endblock%}
+        <p>
+            This application is built as a full-stack data-driven platform using Django and SQLite.
+            It features a data transformation pipeline that imports, cleans, and loads structured data into the database.
+        </p>
+
+        <p>
+            The system supports full CRUD functionality, allowing users to create, read, update, and delete records efficiently.
+        </p>
+
+        <p>
+            It also includes interactive analytical dashboards powered by Chart.js, which visualize key business and user statistics.
+        </p>
+
+        <p>
+            In addition, the platform integrates a RESTful API that fetches the top movies of the week from The Movie Database (TMDB),
+            displaying real-time trending content.
+        </p>
+
+        <p>
+            A machine learning component using an XGBoost model is also implemented to predict user churn based on behavioral and account data.
+        </p>
+    </section>
+
+    <!-- ABOUT ME -->
+    <section>
+        <h1>About Me</h1>
+
+        <p>
+            I’m a Computer Science student with a strong interest in data science, machine learning, and building data-driven applications.
+            I enjoy working with Python, SQL, and modern data tools to clean, analyze, and model real-world datasets.
+        </p>
+
+        <p>
+            I’ve built projects involving predictive modeling and full-stack data applications, where I’ve worked on everything
+            from data preprocessing and feature engineering to model training and deploying interactive dashboards.
+            I’m especially interested in turning raw data into meaningful insights that can support better decision-making.
+        </p>
+
+        <p>
+            I’m currently pursuing a data science internship where I can further develop my skills in machine learning,
+            data engineering, and analytics, and contribute to real-world projects in a collaborative environment.
+        </p>
+
+        <!-- LINKS -->
+        <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
+
+            <a href="https://github.com/manwillerc/" target="_blank">
+                GitHub
+            </a>
+
+            <a href="https://www.linkedin.com/in/caden-manwiller-9805642b7/?skipRedirect=true" target="_blank">
+                LinkedIn
+            </a>
+
+            <a href="{% static 'CadenManwillerResume.pdf' %}" download>
+                Download Resume
+            </a>
+
+        </div>
+    </section>
+
+</div>
+</container>
+{% endblock %}

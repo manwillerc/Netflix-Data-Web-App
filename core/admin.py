@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Viewer, Account, Behavior
+from .models import Viewer, Account, Behavior, Movie
 
 # Register your models here.
 class ViewerAdmin(admin.ModelAdmin):
@@ -45,8 +45,7 @@ admin.site.register(Account, AccountAdmin)
 
 class BehaviorAdmin(admin.ModelAdmin):
     list_display = (
-        "id",
-        "viewer",
+        "account",
         "favorite_genre",
         "avg_watch_time_mins",
         "watch_sessions_per_week",
@@ -64,3 +63,22 @@ class BehaviorAdmin(admin.ModelAdmin):
     )
 
 admin.site.register(Behavior, BehaviorAdmin)
+
+
+class MovieAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "overview",
+        "image",
+        "popularity"
+    )
+
+    search_fields = (
+        "title",
+    )
+
+    list_filter = (
+        "title",
+    )
+
+admin.site.register(Movie, MovieAdmin)

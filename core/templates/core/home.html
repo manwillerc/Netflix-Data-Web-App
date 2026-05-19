@@ -3,6 +3,30 @@
 {% block title%} Home {%endblock%}
 
 {%block content%}
-<h1> Home page nigga!</h1>
-<p> This page uses the base layout</p>
+<h1 style="text-align: center;"> Dashboard</h1>
+<container class="stat-container">
+    <container class="stat-box">
+        <p class="stat-label">Total Viewers: </p>
+        <p class="stat-text">{{total_viewers}}</p>
+    </container>
+    <container class="stat-box">
+        <p class="stat-label">Total Accounts:</p>
+        <p class="stat-text">{{total_accounts}}</p>
+    </container>
+</container>
+
+<div class="button-grid" style="margin-top: 30px;">
+
+         
+
+        <a href="{% url 'add_viewer' %}" class="btn">Add Viewer</a> 
+
+        <a href="{% url 'add_account' %}" class="btn">Add account</a> 
+        
+        <a href="{% url 'viewer_list' %}" class="btn">Viewers List</a>
+
+        <a href="{% url 'account_list' %}" class="btn">Account List</a>
+
+
+</div>
 {%endblock%}

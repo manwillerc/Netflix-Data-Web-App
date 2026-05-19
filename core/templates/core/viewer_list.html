@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Viewer List
+{% endblock %}
+
+{%block content%}
+
+<h1 style="text-align: center; ">Viewers</h1>
+
+<div style="display:flex; flex-direction:column; gap:20px;">
+    {%for viewer in viewers %}
+        <div class="link-box">
+            <a href="{% url 'viewer_details' viewer.pk %}">
+                Viewer ID: {{ viewer.pk}}
+            </a>
+        </div>
+    {% empty %}
+        <li>No viewers found</li>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

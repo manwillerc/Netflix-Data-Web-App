@@ -1,5 +1,5 @@
 """
-URL configuration for project3 project.
+URL configuration for NetflixWebApp project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/6.0/topics/http/urls/
@@ -21,4 +21,5 @@ from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+    path('select2', include('django_select2.urls'))
 ]
