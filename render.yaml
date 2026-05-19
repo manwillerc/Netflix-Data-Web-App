@@ -1,8 +1,8 @@
 databases:
-  - name: netflixdb
+  - name: NetflixDataDatabase
     plan: free
-    databaseName: netflixdb
-    user: netflixwebapp
+    databaseName: netflixdatadatabase
+    user: netflixdatadatabase_user
 
 services:
   - type: web
@@ -10,11 +10,11 @@ services:
     name: NetflixWebApp
     runtime: python
     buildCommand: './build.sh'
-    startCommand: 'python -m gunicorn NetflixWebApp.wsgi:application -k uvicorn.workers.UvicornWorker' 
+    startCommand: python -m gunicorn NetflixWebApp.wsgi:application
     envVars:
-      - key: 'postgresql://netflixdatadatabase_user:kYlkW32ZvnCEzuru5xWKM4HZzuApB4JQ@dpg-d868ud8jo89c7386eg0g-a.ohio-postgres.render.com/netflixdatadatabase'
+      - key: DATABASE_URL
         fromDatabase:
-          name: netflixdb
+          name: NetflixDataDatabase
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
