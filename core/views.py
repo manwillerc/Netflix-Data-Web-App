@@ -6,8 +6,6 @@ from .forms import AccountForm, ViewerForm, BehaviorForm, PredictionForm
 from .models import Viewer, Account, Behavior
 from django.db import connection
 import pandas as pd
-import sklearn
-import xgboost
 import joblib
 import json
 
