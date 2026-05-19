@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'NetflixWebApp.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv("DATABASE_URL"),
+        default='postgresql://netflixdatadatabase_user:kYlkW32ZvnCEzuru5xWKM4HZzuApB4JQ@dpg-d868ud8jo89c7386eg0g-a.ohio-postgres.render.com/netflixdatadatabase',
         conn_max_age=600
     )
 }
