@@ -36,8 +36,8 @@
     </container>
 </div>
 <script>
-    const labels = {{ label|safe }};
-    const data = {{ values|safe }};
+    const labels = JSON.parse('{{ label|escapejs }}');
+    const data = JSON.parse('{{ values|escape }}');
 
     new Chart(document.getElementById('chart1'), {
         type: 'bar',
@@ -56,8 +56,8 @@
     });
 </script>
 <script>
-    const chart_2_labels = {{ age|safe }};
-    const chart_2_data = {{ avg_watch_session|safe }};
+    const chart_2_labels = JSON.parse('{{ age|escapejs }}');
+    const chart_2_data = JSON.parse('{{ avg_watch_session|escapejs }}');
 
     new Chart(document.getElementById('chart2'), {
         type: 'line',
@@ -78,8 +78,8 @@
     });
 </script>
 <script>
-    const chart_3_labels = {{ country|safe }};
-    const chart_3_data = {{ total_revenue|safe }};
+    const chart_3_labels = JSON.parse('{{ country|safe }}');
+    const chart_3_data = JSON.parse('{{ total_revenue|escapejs }}');
 
     new Chart(document.getElementById('chart3'), {
         type: 'bar',
@@ -99,8 +99,8 @@
     });
 </script>
 <script>
-    const chart_4_labels = {{ country2|safe }};
-    const chart_4_data = {{ churn_rate|safe }};
+    const chart_4_labels = JSON.parse('{{ country2|escapejs }}');
+    const chart_4_data = JSON.parse('{{ churn_rate|escapejs }}');
 
     new Chart(document.getElementById('chart4'), {
         type: 'pie',
