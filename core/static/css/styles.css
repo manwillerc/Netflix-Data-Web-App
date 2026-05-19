@@ -274,7 +274,7 @@ form {
     display:flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
 
     font-size: 30px;
     margin:10px;
