@@ -96,5 +96,5 @@ A full-stack data-driven web application built with Django that demonstrates end
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/Netflix-Data-Web-App.git
+git clone https://github.com/manwillerc/Netflix-Data-Web-App.git
 cd Netflix-Data-Web-App
