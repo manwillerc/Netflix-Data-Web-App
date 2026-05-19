@@ -12,7 +12,7 @@ services:
     buildCommand: './build.sh'
     startCommand: 'python -m gunicorn NetflixWebApp.wsgi:application -k uvicorn.workers.UvicornWorker' 
     envVars:
-      - key: DATABASE_URL
+      - key: 'postgresql://netflixdatadatabase_user:kYlkW32ZvnCEzuru5xWKM4HZzuApB4JQ@dpg-d868ud8jo89c7386eg0g-a.ohio-postgres.render.com/netflixdatadatabase'
         fromDatabase:
           name: netflixdb
           property: connectionString
