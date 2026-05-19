@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}
+Projects
+{% endblock %}
+
+{% block content %}
+<container style="margin-top:40px; padding:20px;">
+    <h1>My Projects</h1>
+    <p>Click any project below to view the source code on GitHub.</p>
+
+    <div class="list-group" style="width:100%; max-width:700px;">
+        <a href="https://github.com/manwillerc/Netflix-Data-Web-App"
+           target="_blank"
+           class="btn"
+           style="display:block; width:100%; margin-bottom:20px;">
+            Netflix Data Analytics Web App
+        </a>
+
+        <a href="https://github.com/manwillerc/US-Health-Insurance-Model"
+           target="_blank"
+           class="btn"
+           style="display:block; width:100%; margin-bottom:20px;">
+            US Health Insurance Charge Prediction Model
+        </a>
+
+        <a href="https://github.com/manwillerc/NBA-Database"
+           target="_blank"
+           class="btn"
+           style="display:block; width:100%; margin-bottom:20px;">
+            Historic NBA Statistics Database
+        </a>
+
+    </div>
+</container>
+{% endblock %}

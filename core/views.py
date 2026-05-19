@@ -265,3 +265,6 @@ def top_charts(request):
     top_movies = Movie.objects.all().order_by("popularity")
 
     return render(request, "core/top_charts.html", {"top_movies":top_movies})
+
+def projects(request):
+    return render(request, "core/projects.html")
