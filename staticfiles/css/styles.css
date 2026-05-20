@@ -177,6 +177,7 @@ container {
 }
 
 .form {
+    display: block;
     margin-right: 20%;
     margin-left: 20%;
     margin-bottom: 30px;
@@ -274,7 +275,7 @@ form {
     display:flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
 
     font-size: 30px;
     margin:10px;
@@ -296,8 +297,9 @@ input[type="number"] {
     border-radius: 8px;
     border: 2px solid var(--theme_red);
     font-size: 16px;
-    width:50px;
+    width:80px;
 }
+
 
 * {
     box-sizing: border-box;
