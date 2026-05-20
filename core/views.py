@@ -173,23 +173,24 @@ def delete_viewer(request, pk):
 
 
 def predict_churn(request):
-    MODEL_PATH = "/Users/cadenmanwiller/Desktop/CIS4930/NetflixWebApp/core/ml_models/churn_model.pkl"
-    model = joblib.load(MODEL_PATH)
-
-    churn_pred = None
-    if request.method == "POST":
-        prediction_form = PredictionForm(request.POST)
-
-        if prediction_form.is_valid():
-            data = prediction_form.cleaned_data
-            df = pd.DataFrame([data])
-            result = model.predict(df)[0]
-            churn_pred = "Customer likely to churn" if (result==1) else "Customer unlikely to churn"
-            
-    else:
-        prediction_form = PredictionForm()
-
-    return render(request, "core/prediction_form.html", {"prediction_form":prediction_form, "churn_pred":churn_pred})
+#    MODEL_PATH = "/Users/cadenmanwiller/Desktop/CIS4930/NetflixWebApp/core/ml_models/churn_model.pkl"
+#    model = joblib.load(MODEL_PATH)
+#
+#    churn_pred = None
+#    if request.method == "POST":
+#        prediction_form = PredictionForm(request.POST)
+#
+#        if prediction_form.is_valid():
+#            data = prediction_form.cleaned_data
+#            df = pd.DataFrame([data])
+#            result = model.predict(df)[0]
+#            churn_pred = "Customer likely to churn" if (result==1) else "Customer unlikely to churn"
+#            
+#    else:
+#        prediction_form = PredictionForm()
+#
+    #return render(request, "core/prediction_form.html", {"prediction_form":prediction_form, "churn_pred":churn_pred})
+    return render(request, "core/prediction_form.html")
 
 def dashboard(request):
     with connection.cursor() as cursor:
