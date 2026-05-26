@@ -6,8 +6,6 @@ from .forms import AccountForm, ViewerForm, BehaviorForm, PredictionForm
 from .models import Viewer, Account, Behavior
 from django.db import connection
 import pandas as pd
-import sklearn
-import xgboost
 import joblib
 import json
 
@@ -175,23 +173,24 @@ def delete_viewer(request, pk):
 
 
 def predict_churn(request):
-    MODEL_PATH = "/Users/cadenmanwiller/Desktop/CIS4930/NetflixWebApp/core/ml_models/churn_model.pkl"
-    model = joblib.load(MODEL_PATH)
-
-    churn_pred = None
-    if request.method == "POST":
-        prediction_form = PredictionForm(request.POST)
-
-        if prediction_form.is_valid():
-            data = prediction_form.cleaned_data
-            df = pd.DataFrame([data])
-            result = model.predict(df)[0]
-            churn_pred = "Customer likely to churn" if (result==1) else "Customer unlikely to churn"
-            
-    else:
-        prediction_form = PredictionForm()
-
-    return render(request, "core/prediction_form.html", {"prediction_form":prediction_form, "churn_pred":churn_pred})
+#    MODEL_PATH = "/Users/cadenmanwiller/Desktop/CIS4930/NetflixWebApp/core/ml_models/churn_model.pkl"
+#    model = joblib.load(MODEL_PATH)
+#
+#    churn_pred = None
+#    if request.method == "POST":
+#        prediction_form = PredictionForm(request.POST)
+#
+#        if prediction_form.is_valid():
+#            data = prediction_form.cleaned_data
+#            df = pd.DataFrame([data])
+#            result = model.predict(df)[0]
+#            churn_pred = "Customer likely to churn" if (result==1) else "Customer unlikely to churn"
+#            
+#    else:
+#        prediction_form = PredictionForm()
+#
+    #return render(request, "core/prediction_form.html", {"prediction_form":prediction_form, "churn_pred":churn_pred})
+    return render(request, "core/prediction_form.html")
 
 def dashboard(request):
     with connection.cursor() as cursor:
@@ -217,13 +216,14 @@ def dashboard(request):
             ON a.id = b.viewer_id
             JOIN core_behavior c
             ON b.id = c.account_id
-            GROUP BY a.age;
+            GROUP BY a.age
+            ORDER BY a.age;
         """)
         rows = cursor.fetchall()
 
     
         age = [row[0] for row in rows]
-        avg_watch_session = [row[1] for row in rows]
+        avg_watch_session = [float(row[1]) for row in rows]
 
     with connection.cursor() as cursor:
         cursor.execute("""
@@ -243,22 +243,24 @@ def dashboard(request):
 
     with connection.cursor() as cursor:
         cursor.execute("""
-            SELECT a.country, (SUM(c.churned)*100.0 / COUNT(*))
-            FROM core_viewer a JOIN core_account b
-            ON a.id = b.viewer_id
-            JOIN core_behavior c
-            ON b.id = c.account_id
+            SELECT 
+                a.country,
+                (SUM(CASE WHEN c.churned THEN 1 ELSE 0 END) * 100.0) 
+                / NULLIF(COUNT(*), 0) AS churn_rate
+            FROM core_viewer a 
+            JOIN core_account b ON a.id = b.viewer_id
+            JOIN core_behavior c ON b.id = c.account_id
             GROUP BY a.country;
-        """)  
+        """)
         rows = cursor.fetchall()
 
     
         country2 = [row[0] for row in rows]
-        churn_rate = [row[1] for row in rows]
+        churn_rate = [float(row[1]) for row in rows]
 
         print(country2,churn_rate)
 
-    return render(request, "core/dashboard.html", {"label":label, "values":values, "age":age,"avg_watch_session":avg_watch_session, "country":country, "total_revenue":total_revenue, "country2":country2,"churn_rate":churn_rate })
+    return render(request, "core/dashboard.html", {"label":json.dumps(label), "values":json.dumps(values), "age":json.dumps(age),"avg_watch_session":json.dumps(avg_watch_session), "country":json.dumps(country), "total_revenue":json.dumps(total_revenue), "country2":json.dumps(country2),"churn_rate":json.dumps(churn_rate) })
 
 def top_charts(request):
 

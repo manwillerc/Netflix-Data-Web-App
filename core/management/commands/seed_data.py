@@ -2,7 +2,7 @@ import csv
 from django.core.management.base import BaseCommand
 from core.models import Viewer, Account, Behavior
 
-class CSVCommand(BaseCommand):
+class Command(BaseCommand):
     help = "Load CSV data into database"
 
     def add_arguments(self, parser):
@@ -14,8 +14,15 @@ class CSVCommand(BaseCommand):
         with open(file_path, newline="") as file:
             reader = csv.DictReader(file)
 
+            count = 0
 
             for row in reader:
+
+                print(f"reading row {count}")
+                count += 1
+
+                if count == 5000:
+                    break
                 
                 viewer = Viewer.objects.create(
                     age=row["age"],
